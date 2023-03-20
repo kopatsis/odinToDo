@@ -4,10 +4,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="main.js"></script>
+    <script defer src="main.js"></script>
     <title>To-do List</title>
 </head>
 <body>
-    <div id="content"></div>
+    <div id="content">
+        <button id="create">Create</button>
+        <div class="formOuter">
+            <div class="formInner">
+                <button class="close">× Close</button>
+                <form method="post" action="">
+                    <label for="tname">Task Name (max 30 characters)</label>
+                    <input id="tname" type="text" name="tname" maxlength="30" required/>
+                    <label for="creator">Task Creator</label>
+                    <input id="creator" type="text" name="creator" required/>
+                    <label for="describe">Description (optional):</label>
+                    <textarea id="describe" name="describe" rows="4"></textarea>
+                    <label for="date">Date (optional):</label>
+                    <input id="date" type="date" name="date"/>
+                    <input type="submit"/>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
+<style>
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 350px;
+    }
+    .formOuter{
+        position: fixed;
+        background: rgba(0, 0, 0, 0.7);
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: none;
+        z-index: 2;
+    }
+    .formOuter.open{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+    }
+    .formInner{
+        background: white;
+        padding: 30px;
+    }
+</style>
 </html>

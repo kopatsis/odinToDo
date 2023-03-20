@@ -1,1 +1,1 @@
-console.log("ree");
+(()=>{const e=document.querySelector("#create"),t=document.querySelector(".formOuter");e.addEventListener("click",(function(){t.classList.add("open")})),document.querySelector(".close").addEventListener("click",(()=>{t.classList.remove("open")})),window.addEventListener("keyup",(function(e){"Escape"==e.key&&t.classList.remove("open")})),window.addEventListener("click",(function(e){e.target.classList.contains("formOuter")&&e.target.classList.contains("open")&&t.classList.remove("open")}))})();
