@@ -16,3 +16,16 @@ window.addEventListener('keyup', function esc(e){
 window.addEventListener('click', function escape(e){
     if (e.target.classList.contains('formOuter') && e.target.classList.contains('open')) formOuter.classList.remove('open');
 });
+
+
+
+
+function todoFactory(name, creator, description, date){
+    return {
+        name: name,
+        creator: creator,
+        description: description,
+        date: date,
+        status: "Incomplete"
+    }
+}
