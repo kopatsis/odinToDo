@@ -112,7 +112,7 @@ function completeTask(e){
     tempcomp.classList.add('unComp');
     tempcomp.classList.add(index);
     tempcomp.textContent = "Undo Complete";
-    // tempcomp.onclick = completeTask;
+    tempcomp.onclick = undoComplete;
 
     const temphouse = document.createElement('div');
     temphouse.classList.add('todoHouse');
@@ -122,6 +122,39 @@ function completeTask(e){
     temphouse.appendChild(tempcomp);
 
     done.appendChild(temphouse);
+}
+
+function undoComplete(e){
+    let index = e.target.classList[1];
+    e.target.parentElement.remove();
+
+    taskCollection[index].status = "Incomplete"
+
+    const tempdesc = document.createElement('div');
+    tempdesc.classList.add('todoDesc');
+    tempdesc.classList.add(index);
+    tempdesc.textContent = " · " + taskCollection[index].name;
+
+    const tempdisp = document.createElement('button');
+    tempdisp.classList.add('todoDisp');
+    tempdisp.classList.add(index);
+    tempdisp.textContent = "View Details";
+    tempdisp.onclick = displayTask;
+
+    const tempcomp = document.createElement('button');
+    tempcomp.classList.add('todoComp');
+    tempcomp.classList.add(index);
+    tempcomp.textContent = "Mark Complete";
+    tempcomp.onclick = completeTask;
+
+    const temphouse = document.createElement('div');
+    temphouse.classList.add('todoHouse');
+    temphouse.classList.add(index);
+    temphouse.appendChild(tempdesc);
+    temphouse.appendChild(tempdisp);
+    temphouse.appendChild(tempcomp);
+
+    tdsect.appendChild(temphouse);
 }
 
 function todoFactory(name, creator, description, date){
