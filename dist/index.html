@@ -31,10 +31,13 @@
         <div class="dispOuter">
             <div class="dispInner">
                 <button class="dispClose">× Close</button>
-                <div class="dispname">Task Name: </div>
-                <div class="dispcreator">Task Creator: </div>
-                <div class="dispdesc">Description: </div>
-                <div class="dispdate">Date Created: </div>
+                <div class="dblInner">
+                    <div class="dispname">Task Name: </div>
+                    <div class="dispcreator">Task Creator: </div>
+                    <div class="dispdesc">Description: </div>
+                    <div class="dispdate">Date Created: </div>
+                    <div class="dispstat">Status: </div>
+                </div>
             </div>
         </div>
     </div>
@@ -85,6 +88,9 @@
         display: grid;
         align-items: center;
         justify-items: center;
+    }
+    .compDesc{
+        text-decoration: line-through;
     }
 </style>
 </html>

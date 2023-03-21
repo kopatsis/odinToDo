@@ -73,7 +73,7 @@ function todoCreate(e){
     formOuter.classList.remove('open');
 }
 
-const dispInner = document.querySelector('.dispInner');
+const dblInner = document.querySelector('.dblInner');
 const dispOuter = document.querySelector('.dispOuter');
 const dispClose = document.querySelector('.dispClose');
 dispClose.addEventListener('click', () =>{
@@ -81,18 +81,47 @@ dispClose.addEventListener('click', () =>{
 })
 function displayTask(e){
     dispOuter.classList.add('open');
-    dispInner.innerHTML = `
-    <button class="dispClose">× Close</button>
+    dblInner.innerHTML = `
     <div class="dispname">Task Name: ${taskCollection[parseInt(e.target.classList[1])].name}</div>
     <div class="dispcreator">Task Creator: ${taskCollection[parseInt(e.target.classList[1])].creator}</div>
     <div class="dispdesc">Description: ${taskCollection[parseInt(e.target.classList[1])].description} </div>
     <div class="dispdate">Date Created: ${taskCollection[parseInt(e.target.classList[1])].date}</div>
+    <div class="dispstat">Status: ${taskCollection[parseInt(e.target.classList[1])].status}</div>
     `;
 }
 
+const done = document.querySelector('.done');
 function completeTask(e){
-    console.log('comp');
-    console.log(e.target.classList);
+    let index = e.target.classList[1];
+    e.target.parentElement.remove();
+
+    taskCollection[index].status = "Complete"
+
+    const tempdesc = document.createElement('div');
+    tempdesc.classList.add('compDesc');
+    tempdesc.classList.add(index);
+    tempdesc.textContent = " · " + taskCollection[index].name;
+
+    const tempdisp = document.createElement('button');
+    tempdisp.classList.add('compDisp');
+    tempdisp.classList.add(index);
+    tempdisp.textContent = "View Details";
+    tempdisp.onclick = displayTask;
+
+    const tempcomp = document.createElement('button');
+    tempcomp.classList.add('unComp');
+    tempcomp.classList.add(index);
+    tempcomp.textContent = "Undo Complete";
+    // tempcomp.onclick = completeTask;
+
+    const temphouse = document.createElement('div');
+    temphouse.classList.add('todoHouse');
+    temphouse.classList.add(index);
+    temphouse.appendChild(tempdesc);
+    temphouse.appendChild(tempdisp);
+    temphouse.appendChild(tempcomp);
+
+    done.appendChild(temphouse);
 }
 
 function todoFactory(name, creator, description, date){
