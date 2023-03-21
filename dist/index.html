@@ -28,6 +28,15 @@
                 </form>
             </div>
         </div>
+        <div class="dispOuter">
+            <div class="dispInner">
+                <button class="dispClose">× Close</button>
+                <div class="dispname">Task Name: </div>
+                <div class="dispcreator">Task Creator: </div>
+                <div class="dispdesc">Description: </div>
+                <div class="dispdate">Date Created: </div>
+            </div>
+        </div>
     </div>
 </body>
 <style>
@@ -57,6 +66,25 @@
     }
     .todoHouse{
         display: flex;
+    }
+    .dispInner{
+        background: white;
+        padding: 30px;
+    }
+    .dispOuter{
+        position: fixed;
+        background: rgba(0, 0, 0, 0.7);
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: none;
+        z-index: 2;
+    }
+    .dispOuter.open{
+        display: grid;
+        align-items: center;
+        justify-items: center;
     }
 </style>
 </html>
