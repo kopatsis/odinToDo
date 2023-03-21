@@ -9,13 +9,13 @@
 </head>
 <body>
     <div id="content">
-        <div class="task title">Tasks to do:</div>
+        <div class="tdtask title">Tasks to do:</div>
         <button id="create">Create New</button>
         <div class="done title">Finished tasks:</div>
         <div class="formOuter">
             <div class="formInner">
                 <button class="close">× Close</button>
-                <form method="post" action="">
+                <form id="createform" method="post" action="">
                     <label for="tname">Task Name (max 40 characters)</label>
                     <input id="tname" type="text" name="tname" maxlength="40" required/>
                     <label for="creator">Task Creator</label>
@@ -54,6 +54,9 @@
     .formInner{
         background: white;
         padding: 30px;
+    }
+    .todoHouse{
+        display: flex;
     }
 </style>
 </html>
