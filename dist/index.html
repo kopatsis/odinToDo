@@ -9,13 +9,15 @@
 </head>
 <body>
     <div id="content">
-        <button id="create">Create</button>
+        <div class="task title">Tasks to do:</div>
+        <button id="create">Create New</button>
+        <div class="done title">Finished tasks:</div>
         <div class="formOuter">
             <div class="formInner">
                 <button class="close">× Close</button>
                 <form method="post" action="">
-                    <label for="tname">Task Name (max 30 characters)</label>
-                    <input id="tname" type="text" name="tname" maxlength="30" required/>
+                    <label for="tname">Task Name (max 40 characters)</label>
+                    <input id="tname" type="text" name="tname" maxlength="40" required/>
                     <label for="creator">Task Creator</label>
                     <input id="creator" type="text" name="creator" required/>
                     <label for="describe">Description (optional):</label>
