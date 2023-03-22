@@ -43,8 +43,6 @@ function todoCreate(e){
         }
     }
     const temp = todoFactory(vals[0], vals[1], vals[2], vals[3]);
-    console.log(temp);
-    console.log(JSON.stringify(temp));
     localStorage.setItem(iterator, JSON.stringify(temp));
 
     const tempdesc = document.createElement('div');
@@ -113,12 +111,12 @@ function completeTask(e){
 
     const tempdesc = document.createElement('div');
     tempdesc.classList.add('todoDesc');
+    tempdesc.classList.add('compDesc');
     tempdesc.classList.add(index);
     tempdesc.textContent = " · " + temp.name;
 
     const tempdisp = document.createElement('button');
     tempdisp.classList.add('todoDisp');
-    tempdisp.classList.add('.compDesc');
     tempdisp.classList.add(index);
     tempdisp.textContent = "≡ Details";
     tempdisp.onclick = displayTask;
@@ -232,7 +230,7 @@ function populateBeg(key, value){
     tempdesc.classList.add('todoDesc');
     tempdesc.classList.add(key);
     tempdesc.textContent = " · " + temp.name;
-    
+
     const tempdisp = document.createElement('button');
     tempdisp.classList.add('todoDisp');
     tempdisp.classList.add(key);
@@ -258,12 +256,12 @@ function populateBeg(key, value){
     temphouse.appendChild(tempcomp);
     temphouse.appendChild(tempdel);
 
-    if (value.status == "Incomplete"){
+    if (temp.status == "Incomplete"){
         tempcomp.onclick = completeTask;
         tdsect.appendChild(temphouse);
     } else{
         tempcomp.onclick = undoComplete;
-        tempdisp.classList.add('.compDesc');
+        tempdesc.classList.add('compDesc');
         done.appendChild(temphouse);
     }
 }
