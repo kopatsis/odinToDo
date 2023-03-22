@@ -9,7 +9,7 @@ html{
 form{
     display: flex;
     flex-direction: column;
-    width: 350px;
+    width: min(70vw, 350px);
     color: black;
 }
 .formOuter{
@@ -20,7 +20,7 @@ form{
     bottom: 0;
     left: 0;
     display: none;
-    z-index: 2
+    z-index: 2;
 }
 .formOuter.open{
     display: grid;
@@ -29,8 +29,8 @@ form{
 }
 .formInner{
     background: white;
-    padding: 30px;
-    border-radius: 10px;
+    padding: min(6vw, 30px);
+    border-radius: min(2vw, 30px);
 }
 .todoHouse{
     display: flex;
@@ -38,9 +38,9 @@ form{
 }
 .dispInner{
     background: white;
-    padding: 30px;
-    border-radius: 10px;
-    max-width: 550px;
+    padding: min(6vw, 30px);
+    border-radius: min(2vw, 30px);
+    max-width: min(100vw, 500px);
 }
 .dispOuter{
     position: fixed;
@@ -66,10 +66,10 @@ button{
     font-family: 'Courier New', Courier, monospace;
     background: none;
     border: 0.16em solid white;
-    border-radius: 6px;
-    font-size: 15px;
+    border-radius: min(1.2vw, 6px);
+    font-size: min(3vw, 15px);
     cursor: pointer;
-    margin: 5px;
+    margin: min(1.2vw, 6px);
 }
 .close, .dispClose{
     color: black;
@@ -81,28 +81,28 @@ button{
 }
 .big{
     font-weight: bolder;
-    font-size: 42px;
+    font-size: min(8.4vw, 42px);
 }
 .title{
-    padding: 6px;
-    font-size: 24px;
+    padding: min(1.2vw, 6px);
+    font-size: min(4.8vw, 24px);
     font-weight: bold;
 }
 .todoDesc, .compDesc{
-    font-size: 18px;
+    font-size: min(3.6vw, 18px);
     font-weight: normal;
-    width: 480px;
+    width: min(100vw, 480px);
 }
 input, textarea{
-    margin-bottom: 5px;
+    margin-bottom: min(1.2vw, 6px);;
     font-family: 'Courier New', Courier, monospace;
 }
 #submit{
     width: fit-content;
     border: 0.16em solid black;
-    border-radius: 6px;
-    font-size: 15px;
+    border-radius: min(1.2vw, 6px);
+    font-size: min(3vw, 15px);
     cursor: pointer;
-    margin: 5px;
+    margin: min(1.2vw, 6px);
     background: none;
 }

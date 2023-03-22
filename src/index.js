@@ -62,12 +62,19 @@ function todoCreate(e){
     tempcomp.textContent = "✓ Complete";
     tempcomp.onclick = completeTask;
 
+    const tempdel = document.createElement('button');
+    tempdel.classList.add('todoDel');
+    tempdel.classList.add(`${taskCollection.length-1}`);
+    tempdel.textContent = "⌦ Delete";
+    tempdel.onclick = deleteTask;
+
     const temphouse = document.createElement('div');
     temphouse.classList.add('todoHouse');
     temphouse.classList.add(`${taskCollection.length-1}`);
     temphouse.appendChild(tempdesc);
     temphouse.appendChild(tempdisp);
     temphouse.appendChild(tempcomp);
+    temphouse.appendChild(tempdel);
 
     tdsect.appendChild(temphouse);
     formOuter.classList.remove('open');
@@ -114,12 +121,19 @@ function completeTask(e){
     tempcomp.textContent = "✗ Incomplete";
     tempcomp.onclick = undoComplete;
 
+    const tempdel = document.createElement('button');
+    tempdel.classList.add('compDel');
+    tempdel.classList.add(`${taskCollection.length-1}`);
+    tempdel.textContent = "⌦ Delete";
+    tempdel.onclick = deleteTask;
+
     const temphouse = document.createElement('div');
     temphouse.classList.add('todoHouse');
     temphouse.classList.add(index);
     temphouse.appendChild(tempdesc);
     temphouse.appendChild(tempdisp);
     temphouse.appendChild(tempcomp);
+    temphouse.appendChild(tempdel);
 
     done.appendChild(temphouse);
 }
@@ -147,14 +161,27 @@ function undoComplete(e){
     tempcomp.textContent = "✓ Complete";
     tempcomp.onclick = completeTask;
 
+    const tempdel = document.createElement('button');
+    tempdel.classList.add('todoDel');
+    tempdel.classList.add(`${taskCollection.length-1}`);
+    tempdel.textContent = "⌦ Delete";
+    tempdel.onclick = deleteTask;
+
     const temphouse = document.createElement('div');
     temphouse.classList.add('todoHouse');
     temphouse.classList.add(index);
     temphouse.appendChild(tempdesc);
     temphouse.appendChild(tempdisp);
     temphouse.appendChild(tempcomp);
+    temphouse.appendChild(tempdel);
 
     tdsect.appendChild(temphouse);
+}
+
+function deleteTask(e){
+    let index = e.target.classList[1];
+    e.target.parentElement.remove();
+    taskCollection[index] = 0;
 }
 
 function todoFactory(name, creator, description, date){
