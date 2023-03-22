@@ -5,9 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="main.js"></script>
+    <link href="style.css" rel="stylesheet"/>
     <title>To-do List</title>
 </head>
 <body>
+    <div class="big">Your Task List:</div>
     <div id="content">
         <div class="tdtask title">Tasks to do:</div>
         <button id="create">Create New</button>
@@ -42,55 +44,5 @@
         </div>
     </div>
 </body>
-<style>
-    form{
-        display: flex;
-        flex-direction: column;
-        width: 350px;
-    }
-    .formOuter{
-        position: fixed;
-        background: rgba(0, 0, 0, 0.7);
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        display: none;
-        z-index: 2;
-    }
-    .formOuter.open{
-        display: grid;
-        align-items: center;
-        justify-items: center;
-    }
-    .formInner{
-        background: white;
-        padding: 30px;
-    }
-    .todoHouse{
-        display: flex;
-    }
-    .dispInner{
-        background: white;
-        padding: 30px;
-    }
-    .dispOuter{
-        position: fixed;
-        background: rgba(0, 0, 0, 0.7);
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        display: none;
-        z-index: 2;
-    }
-    .dispOuter.open{
-        display: grid;
-        align-items: center;
-        justify-items: center;
-    }
-    .compDesc{
-        text-decoration: line-through;
-    }
-</style>
+
 </html>
