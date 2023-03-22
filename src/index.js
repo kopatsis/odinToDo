@@ -184,6 +184,13 @@ function deleteTask(e){
     taskCollection[index] = 0;
 }
 
+const reset = document.querySelector('#reset');
+reset.addEventListener('click', () =>{
+    tdsect.innerHTML = '';
+    done.innerHTML = '';
+    taskCollection.length = 0;
+});
+
 function todoFactory(name, creator, description, date){
     return {
         name: name,
