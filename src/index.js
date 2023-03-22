@@ -19,7 +19,7 @@ window.addEventListener('click', function escape(e){
     if (e.target.classList.contains('dispOuter') && e.target.classList.contains('open')) dispOuter.classList.remove('open');   
 });
 
-const taskCollection = [];
+var iterator = 0;
 const tdsect = document.querySelector('.tdtask');
 
 const tname = document.querySelector('#tname');
@@ -43,34 +43,34 @@ function todoCreate(e){
         }
     }
     const temp = todoFactory(vals[0], vals[1], vals[2], vals[3]);
-    taskCollection.push(temp);
+    localStorage.setItem(iterator, temp);
 
     const tempdesc = document.createElement('div');
     tempdesc.classList.add('todoDesc');
-    tempdesc.classList.add(`${taskCollection.length-1}`);
-    tempdesc.textContent = " · " + temp.name;
+    tempdesc.classList.add(iterator);
+    tempdesc.textContent = " · " + temp.get('name');
 
     const tempdisp = document.createElement('button');
     tempdisp.classList.add('todoDisp');
-    tempdisp.classList.add(`${taskCollection.length-1}`);
+    tempdisp.classList.add(iterator);
     tempdisp.textContent = "≡ Details";
     tempdisp.onclick = displayTask;
 
     const tempcomp = document.createElement('button');
     tempcomp.classList.add('todoComp');
-    tempcomp.classList.add(`${taskCollection.length-1}`);
+    tempcomp.classList.add(iterator);
     tempcomp.textContent = "✓ Complete";
     tempcomp.onclick = completeTask;
 
     const tempdel = document.createElement('button');
     tempdel.classList.add('todoDel');
-    tempdel.classList.add(`${taskCollection.length-1}`);
+    tempdel.classList.add(iterator);
     tempdel.textContent = "⌦ Delete";
     tempdel.onclick = deleteTask;
 
     const temphouse = document.createElement('div');
     temphouse.classList.add('todoHouse');
-    temphouse.classList.add(`${taskCollection.length-1}`);
+    temphouse.classList.add(iterator);
     temphouse.appendChild(tempdesc);
     temphouse.appendChild(tempdisp);
     temphouse.appendChild(tempcomp);
@@ -78,6 +78,8 @@ function todoCreate(e){
 
     tdsect.appendChild(temphouse);
     formOuter.classList.remove('open');
+
+    iterator++;
 }
 
 const dblInner = document.querySelector('.dblInner');
@@ -89,41 +91,42 @@ dispClose.addEventListener('click', () =>{
 function displayTask(e){
     dispOuter.classList.add('open');
     dblInner.innerHTML = `
-    <div class="disp name">Task Name: ${taskCollection[parseInt(e.target.classList[1])].name}</div>
-    <div class="disp creator">Task Creator: ${taskCollection[parseInt(e.target.classList[1])].creator}</div>
-    <div class="disp desc">Description: ${taskCollection[parseInt(e.target.classList[1])].description} </div>
-    <div class="disp date">Date Created: ${taskCollection[parseInt(e.target.classList[1])].date}</div>
-    <div class="disp stat">Status: ${taskCollection[parseInt(e.target.classList[1])].status}</div>
+    <div class="disp name">Task Name: ${localStorage[parseInt(e.target.classList[1])].get('name')}</div>
+    <div class="disp creator">Task Creator: ${localStorage[parseInt(e.target.classList[1])].get('creator')}</div>
+    <div class="disp desc">Description: ${localStorage[parseInt(e.target.classList[1])].get('description')} </div>
+    <div class="disp date">Date Created: ${localStorage[parseInt(e.target.classList[1])].get('date')}</div>
+    <div class="disp stat">Status: ${localStorage[parseInt(e.target.classList[1])].get('status')}</div>
     `;
 }
 
 const done = document.querySelector('.done');
 function completeTask(e){
-    let index = e.target.classList[1];
+    let index = parseInt(e.target.classList[1]);
     e.target.parentElement.remove();
 
-    taskCollection[index].status = "Complete"
+    localStorage[index].status = "Complete"
 
     const tempdesc = document.createElement('div');
-    tempdesc.classList.add('compDesc');
+    tempdesc.classList.add('todoDesc');
     tempdesc.classList.add(index);
-    tempdesc.textContent = " · " + taskCollection[index].name;
+    tempdesc.textContent = " · " + localStorage[index].name;
 
     const tempdisp = document.createElement('button');
-    tempdisp.classList.add('compDisp');
+    tempdisp.classList.add('todoDisp');
+    tempdisp.classList.add('.compDesc');
     tempdisp.classList.add(index);
     tempdisp.textContent = "≡ Details";
     tempdisp.onclick = displayTask;
 
     const tempcomp = document.createElement('button');
-    tempcomp.classList.add('compComp');
+    tempcomp.classList.add('todoComp');
     tempcomp.classList.add(index);
     tempcomp.textContent = "✗ Incomplete";
     tempcomp.onclick = undoComplete;
 
     const tempdel = document.createElement('button');
-    tempdel.classList.add('compDel');
-    tempdel.classList.add(`${taskCollection.length-1}`);
+    tempdel.classList.add('todoDel');
+    tempdel.classList.add(index);
     tempdel.textContent = "⌦ Delete";
     tempdel.onclick = deleteTask;
 
@@ -139,15 +142,15 @@ function completeTask(e){
 }
 
 function undoComplete(e){
-    let index = e.target.classList[1];
+    let index = parseInt(e.target.classList[1]);
     e.target.parentElement.remove();
 
-    taskCollection[index].status = "Incomplete"
+    localStorage[index].status = "Incomplete"
 
     const tempdesc = document.createElement('div');
     tempdesc.classList.add('todoDesc');
     tempdesc.classList.add(index);
-    tempdesc.textContent = " · " + taskCollection[index].name;
+    tempdesc.textContent = " · " + localStorage[index].name;
 
     const tempdisp = document.createElement('button');
     tempdisp.classList.add('todoDisp');
@@ -163,7 +166,7 @@ function undoComplete(e){
 
     const tempdel = document.createElement('button');
     tempdel.classList.add('todoDel');
-    tempdel.classList.add(`${taskCollection.length-1}`);
+    tempdel.classList.add(index);
     tempdel.textContent = "⌦ Delete";
     tempdel.onclick = deleteTask;
 
@@ -179,24 +182,81 @@ function undoComplete(e){
 }
 
 function deleteTask(e){
-    let index = e.target.classList[1];
+    let index = parsInt(e.target.classList[1]);
     e.target.parentElement.remove();
-    taskCollection[index] = 0;
+    localStorage[index] = 555;
 }
 
 const reset = document.querySelector('#reset');
 reset.addEventListener('click', () =>{
     tdsect.innerHTML = '';
     done.innerHTML = '';
-    taskCollection.length = 0;
+    localStorage.clear();
 });
 
 function todoFactory(name, creator, description, date){
-    return {
-        name: name,
-        creator: creator,
-        description: description,
-        date: date,
-        status: "Incomplete"
+    var map = new Map();
+    map.set('name', name);
+    map.set('creator', creator);
+    map.set('description', description);
+    map.set('date', date);
+    map.set('status', "Incomplete");
+    return map;
+}
+
+function populator(){
+    if (localStorage["parametersetbyme"] != null){
+        for (const [key, value] of Object.entries(localStorage)){
+            if (value != 555){
+                iterator += 1;
+                populateBeg(key, value);
+            }
+        }
+    } else{
+        localStorage.clear();
+        localStorage["parametersetbyme"] = 555;
     }
 }
+
+function populateBeg(key, value){
+    const tempdesc = document.createElement('div');
+    tempdesc.classList.add('todoDesc');
+    tempdesc.classList.add(key);
+    tempdesc.textContent = " · " + value.name;
+
+    const tempdisp = document.createElement('button');
+    tempdisp.classList.add('todoDisp');
+    tempdisp.classList.add(key);
+    tempdisp.textContent = "≡ Details";
+    tempdisp.onclick = displayTask;
+
+    const tempcomp = document.createElement('button');
+    tempcomp.classList.add('todoComp');
+    tempcomp.classList.add(key);
+    tempcomp.textContent = "✗ Incomplete";
+
+    const tempdel = document.createElement('button');
+    tempdel.classList.add('todoDel');
+    tempdel.classList.add(key);
+    tempdel.textContent = "⌦ Delete";
+    tempdel.onclick = deleteTask;
+
+    const temphouse = document.createElement('div');
+    temphouse.classList.add('todoHouse');
+    temphouse.classList.add(key);
+    temphouse.appendChild(tempdesc);
+    temphouse.appendChild(tempdisp);
+    temphouse.appendChild(tempcomp);
+    temphouse.appendChild(tempdel);
+
+    if (value.status == "Incomplete"){
+        tempcomp.onclick = completeTask;
+        tdsect.appendChild(temphouse);
+    } else{
+        tempcomp.onclick = undoComplete;
+        tempdisp.classList.add('.compDesc');
+        done.appendChild(temphouse);
+    }
+}
+
+populator();

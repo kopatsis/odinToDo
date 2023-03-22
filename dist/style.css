@@ -88,7 +88,7 @@ button{
     font-size: min(4.8vw, 24px);
     font-weight: bold;
 }
-.todoDesc, .compDesc{
+.todoDesc{
     font-size: min(3.6vw, 18px);
     font-weight: normal;
     width: min(100vw, 480px);
