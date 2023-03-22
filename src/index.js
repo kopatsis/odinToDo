@@ -43,12 +43,14 @@ function todoCreate(e){
         }
     }
     const temp = todoFactory(vals[0], vals[1], vals[2], vals[3]);
-    localStorage.setItem(iterator, temp);
+    console.log(temp);
+    console.log(JSON.stringify(temp));
+    localStorage.setItem(iterator, JSON.stringify(temp));
 
     const tempdesc = document.createElement('div');
     tempdesc.classList.add('todoDesc');
     tempdesc.classList.add(iterator);
-    tempdesc.textContent = " · " + temp.get('name');
+    tempdesc.textContent = " · " + temp.name;
 
     const tempdisp = document.createElement('button');
     tempdisp.classList.add('todoDisp');
@@ -90,12 +92,13 @@ dispClose.addEventListener('click', () =>{
 })
 function displayTask(e){
     dispOuter.classList.add('open');
+    let temp = JSON.parse(localStorage.getItem(parseInt(e.target.classList[1])));
     dblInner.innerHTML = `
-    <div class="disp name">Task Name: ${localStorage[parseInt(e.target.classList[1])].get('name')}</div>
-    <div class="disp creator">Task Creator: ${localStorage[parseInt(e.target.classList[1])].get('creator')}</div>
-    <div class="disp desc">Description: ${localStorage[parseInt(e.target.classList[1])].get('description')} </div>
-    <div class="disp date">Date Created: ${localStorage[parseInt(e.target.classList[1])].get('date')}</div>
-    <div class="disp stat">Status: ${localStorage[parseInt(e.target.classList[1])].get('status')}</div>
+    <div class="disp name">Task Name: ${temp.name}</div>
+    <div class="disp creator">Task Creator: ${temp.creator}</div>
+    <div class="disp desc">Description: ${temp.description} </div>
+    <div class="disp date">Date Created: ${temp.date}</div>
+    <div class="disp stat">Status: ${temp.status}</div>
     `;
 }
 
@@ -104,12 +107,14 @@ function completeTask(e){
     let index = parseInt(e.target.classList[1]);
     e.target.parentElement.remove();
 
-    localStorage[index].status = "Complete"
+    let temp = JSON.parse(localStorage.getItem(index));
+    temp.status = 'Complete';
+    localStorage.setItem(index, JSON.stringify(temp));
 
     const tempdesc = document.createElement('div');
     tempdesc.classList.add('todoDesc');
     tempdesc.classList.add(index);
-    tempdesc.textContent = " · " + localStorage[index].name;
+    tempdesc.textContent = " · " + temp.name;
 
     const tempdisp = document.createElement('button');
     tempdisp.classList.add('todoDisp');
@@ -145,12 +150,14 @@ function undoComplete(e){
     let index = parseInt(e.target.classList[1]);
     e.target.parentElement.remove();
 
-    localStorage[index].status = "Incomplete"
+    let temp = JSON.parse(localStorage.getItem(index));
+    temp.status = 'Incomplete';
+    localStorage.setItem(index, JSON.stringify(temp));
 
     const tempdesc = document.createElement('div');
     tempdesc.classList.add('todoDesc');
     tempdesc.classList.add(index);
-    tempdesc.textContent = " · " + localStorage[index].name;
+    tempdesc.textContent = " · " + temp.name;
 
     const tempdisp = document.createElement('button');
     tempdisp.classList.add('todoDisp');
@@ -182,9 +189,9 @@ function undoComplete(e){
 }
 
 function deleteTask(e){
-    let index = parsInt(e.target.classList[1]);
+    let index = parseInt(e.target.classList[1]);
     e.target.parentElement.remove();
-    localStorage[index] = 555;
+    localStorage.setItem(index, 555);
 }
 
 const reset = document.querySelector('#reset');
@@ -195,20 +202,20 @@ reset.addEventListener('click', () =>{
 });
 
 function todoFactory(name, creator, description, date){
-    var map = new Map();
-    map.set('name', name);
-    map.set('creator', creator);
-    map.set('description', description);
-    map.set('date', date);
-    map.set('status', "Incomplete");
-    return map;
+    return{
+        name: name,
+        creator: creator,
+        description: description,
+        date: date,
+        status: "Incomplete"
+    }
 }
 
 function populator(){
-    if (localStorage["parametersetbyme"] != null){
+    if (localStorage["parametersetbyme"] == 555){
         for (const [key, value] of Object.entries(localStorage)){
             if (value != 555){
-                iterator += 1;
+                iterator++;
                 populateBeg(key, value);
             }
         }
@@ -219,11 +226,13 @@ function populator(){
 }
 
 function populateBeg(key, value){
+    let temp = JSON.parse(value);
+
     const tempdesc = document.createElement('div');
     tempdesc.classList.add('todoDesc');
     tempdesc.classList.add(key);
-    tempdesc.textContent = " · " + value.name;
-
+    tempdesc.textContent = " · " + temp.name;
+    
     const tempdisp = document.createElement('button');
     tempdisp.classList.add('todoDisp');
     tempdisp.classList.add(key);
