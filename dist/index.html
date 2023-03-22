@@ -9,10 +9,13 @@
     <title>To-do List</title>
 </head>
 <body>
-    <div class="big">Your Task List:</div>
+    <div class="Touter">
+        <div class="big">Your Task List:</div>
+    </div>
     <div id="content">
-        <div class="tdtask title">Tasks to do:</div>
-        <button id="create">Create New</button>
+        <div class="title">Tasks to do:</div>
+        <div class="tdtask "></div>
+        <button id="create">+ Create New</button>
         <div class="done title">Finished tasks:</div>
         <div class="formOuter">
             <div class="formInner">
@@ -23,10 +26,10 @@
                     <label for="creator">Task Creator</label>
                     <input id="creator" type="text" name="creator" required/>
                     <label for="describe">Description (optional):</label>
-                    <textarea id="describe" name="describe" rows="4"></textarea>
+                    <textarea id="describe" name="describe" rows="4" maxlength="500"></textarea>
                     <label for="date">Date (optional):</label>
                     <input id="date" type="date" name="date"/>
-                    <input id="submit" type="submit"/>
+                    <input id="submit" type="submit" value="→ Submit"/>
                 </form>
             </div>
         </div>
@@ -34,11 +37,6 @@
             <div class="dispInner">
                 <button class="dispClose">× Close</button>
                 <div class="dblInner">
-                    <div class="dispname">Task Name: </div>
-                    <div class="dispcreator">Task Creator: </div>
-                    <div class="dispdesc">Description: </div>
-                    <div class="dispdate">Date Created: </div>
-                    <div class="dispstat">Status: </div>
                 </div>
             </div>
         </div>

@@ -1,7 +1,16 @@
+html{
+    background: linear-gradient(-20deg, #dcb0ed 0%, #99c99c 100%);
+    color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    font-family: 'Courier New', Courier, monospace;
+}
 form{
     display: flex;
     flex-direction: column;
     width: 350px;
+    color: black;
 }
 .formOuter{
     position: fixed;
@@ -11,7 +20,7 @@ form{
     bottom: 0;
     left: 0;
     display: none;
-    z-index: 2;
+    z-index: 2
 }
 .formOuter.open{
     display: grid;
@@ -21,13 +30,17 @@ form{
 .formInner{
     background: white;
     padding: 30px;
+    border-radius: 10px;
 }
 .todoHouse{
     display: flex;
+    flex-wrap: wrap;
 }
 .dispInner{
     background: white;
     padding: 30px;
+    border-radius: 10px;
+    max-width: 550px;
 }
 .dispOuter{
     position: fixed;
@@ -38,6 +51,7 @@ form{
     left: 0;
     display: none;
     z-index: 2;
+    color: black;
 }
 .dispOuter.open{
     display: grid;
@@ -46,4 +60,49 @@ form{
 }
 .compDesc{
     text-decoration: line-through;
+}
+button{
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    background: none;
+    border: 0.16em solid white;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    margin: 5px;
+}
+.close, .dispClose{
+    color: black;
+    border: 0.16em solid black;
+}
+.Touter{
+    display: flex;
+    justify-content: center;
+}
+.big{
+    font-weight: bolder;
+    font-size: 42px;
+}
+.title{
+    padding: 6px;
+    font-size: 24px;
+    font-weight: bold;
+}
+.todoDesc, .compDesc{
+    font-size: 18px;
+    font-weight: normal;
+    width: 480px;
+}
+input, textarea{
+    margin-bottom: 5px;
+    font-family: 'Courier New', Courier, monospace;
+}
+#submit{
+    width: fit-content;
+    border: 0.16em solid black;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    margin: 5px;
+    background: none;
 }

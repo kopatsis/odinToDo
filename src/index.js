@@ -53,13 +53,13 @@ function todoCreate(e){
     const tempdisp = document.createElement('button');
     tempdisp.classList.add('todoDisp');
     tempdisp.classList.add(`${taskCollection.length-1}`);
-    tempdisp.textContent = "View Details";
+    tempdisp.textContent = "≡ Details";
     tempdisp.onclick = displayTask;
 
     const tempcomp = document.createElement('button');
     tempcomp.classList.add('todoComp');
     tempcomp.classList.add(`${taskCollection.length-1}`);
-    tempcomp.textContent = "Mark Complete";
+    tempcomp.textContent = "✓ Complete";
     tempcomp.onclick = completeTask;
 
     const temphouse = document.createElement('div');
@@ -82,11 +82,11 @@ dispClose.addEventListener('click', () =>{
 function displayTask(e){
     dispOuter.classList.add('open');
     dblInner.innerHTML = `
-    <div class="dispname">Task Name: ${taskCollection[parseInt(e.target.classList[1])].name}</div>
-    <div class="dispcreator">Task Creator: ${taskCollection[parseInt(e.target.classList[1])].creator}</div>
-    <div class="dispdesc">Description: ${taskCollection[parseInt(e.target.classList[1])].description} </div>
-    <div class="dispdate">Date Created: ${taskCollection[parseInt(e.target.classList[1])].date}</div>
-    <div class="dispstat">Status: ${taskCollection[parseInt(e.target.classList[1])].status}</div>
+    <div class="disp name">Task Name: ${taskCollection[parseInt(e.target.classList[1])].name}</div>
+    <div class="disp creator">Task Creator: ${taskCollection[parseInt(e.target.classList[1])].creator}</div>
+    <div class="disp desc">Description: ${taskCollection[parseInt(e.target.classList[1])].description} </div>
+    <div class="disp date">Date Created: ${taskCollection[parseInt(e.target.classList[1])].date}</div>
+    <div class="disp stat">Status: ${taskCollection[parseInt(e.target.classList[1])].status}</div>
     `;
 }
 
@@ -105,13 +105,13 @@ function completeTask(e){
     const tempdisp = document.createElement('button');
     tempdisp.classList.add('compDisp');
     tempdisp.classList.add(index);
-    tempdisp.textContent = "View Details";
+    tempdisp.textContent = "≡ Details";
     tempdisp.onclick = displayTask;
 
     const tempcomp = document.createElement('button');
-    tempcomp.classList.add('unComp');
+    tempcomp.classList.add('compComp');
     tempcomp.classList.add(index);
-    tempcomp.textContent = "Undo Complete";
+    tempcomp.textContent = "✗ Incomplete";
     tempcomp.onclick = undoComplete;
 
     const temphouse = document.createElement('div');
@@ -138,13 +138,13 @@ function undoComplete(e){
     const tempdisp = document.createElement('button');
     tempdisp.classList.add('todoDisp');
     tempdisp.classList.add(index);
-    tempdisp.textContent = "View Details";
+    tempdisp.textContent = "≡ Details";
     tempdisp.onclick = displayTask;
 
     const tempcomp = document.createElement('button');
     tempcomp.classList.add('todoComp');
     tempcomp.classList.add(index);
-    tempcomp.textContent = "Mark Complete";
+    tempcomp.textContent = "✓ Complete";
     tempcomp.onclick = completeTask;
 
     const temphouse = document.createElement('div');
