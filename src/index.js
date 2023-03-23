@@ -39,7 +39,7 @@ window.addEventListener('keyup', function esc(e){
         } else{
             formOuter.classList.remove('open');
         }
-    } formOuter.classList.remove('open');
+    }
     if (e.key == 'Escape' && dispOuter.classList.contains('open')) {
         dispOuter.classList.remove('open')
         edit.setAttribute('class', '');
@@ -199,8 +199,8 @@ function editFinal(e){
     temp.description = vals[2];
     temp.date = vals[3];
 
-    localStorage.setItem(iterator, JSON.stringify(temp));
-    document.querySelector(`.todoDesc.${index}`).textContent = temp.name;
+    localStorage.setItem(index, JSON.stringify(temp));
+    document.getElementsByClassName(`todoDesc ${index}`)[0].textContent = " · " + temp.name;
 
     form.reset();
     formOuter.classList.remove('open');
