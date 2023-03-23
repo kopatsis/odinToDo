@@ -12,11 +12,19 @@ close.addEventListener('click', () => {
 });
 window.addEventListener('keyup', function esc(e){
     if (e.key == 'Escape' && formOuter.classList.contains('open')) formOuter.classList.remove('open');
-    if (e.key == 'Escape' && dispOuter.classList.contains('open')) dispOuter.classList.remove('open');
+    if (e.key == 'Escape' && dispOuter.classList.contains('open')) {
+        dispOuter.classList.remove('open')
+        edit.setAttribute('class', '');
+        edit.classList.add("dispEdit");
+    }
 });
 window.addEventListener('click', function escape(e){
     if (e.target.classList.contains('formOuter') && e.target.classList.contains('open')) formOuter.classList.remove('open');
-    if (e.target.classList.contains('dispOuter') && e.target.classList.contains('open')) dispOuter.classList.remove('open');   
+    if (e.target.classList.contains('dispOuter') && e.target.classList.contains('open')) {
+        dispOuter.classList.remove('open')
+        edit.setAttribute('class', '');
+        edit.classList.add("dispEdit");
+    }  
 });
 
 var iterator = 0;
@@ -87,10 +95,15 @@ const dispOuter = document.querySelector('.dispOuter');
 const dispClose = document.querySelector('.dispClose');
 dispClose.addEventListener('click', () =>{
     dispOuter.classList.remove('open');
-})
+    edit.setAttribute('class', '');
+    edit.classList.add("dispEdit");
+});
+
+const edit = document.querySelector('.dispEdit');
 function displayTask(e){
     dispOuter.classList.add('open');
     let temp = JSON.parse(localStorage.getItem(parseInt(e.target.classList[1])));
+    edit.classList.add(parseInt(e.target.classList[1]));
     dblInner.innerHTML = `
     <div class="disp name">Task Name:</div>
     <div class="display small">${temp.name}</div>
@@ -103,6 +116,57 @@ function displayTask(e){
     <div class="disp stat">Status:</div>
     <div class="display small">${temp.status}</div>
     `;
+}
+
+edit.addEventListener('click', editor);
+
+function editor(e){
+    let index = parseInt(e.target.classList[1]);
+    dispOuter.classList.remove('open');
+    formOuter.classList.add('open');
+
+    form.classList.add(index);
+    form.removeEventListener('submit', todoCreate);
+    form.addEventListener('submit', editFinal);
+
+    let temp = JSON.parse(localStorage.getItem(index));
+    document.querySelector('#tname').value = temp.name;
+    document.querySelector('#creator').value = temp.creator;
+    if (temp.description != "N/A") document.querySelector('#describe').value = temp.description;
+    if (temp.date != "N/A") document.querySelector('#date').value = temp.date;
+}
+
+function editFinal(e){
+    e.preventDefault();
+    let formData = new FormData(form);
+    let vals = []
+    for (const pair of formData.entries()) {
+        if (pair[1] == ''){
+            vals.push("N/A");
+        } else{
+            vals.push(pair[1]);
+        }
+    }
+
+    let index = parseInt(e.target.classList[0]);
+    let temp = JSON.parse(localStorage.getItem(index));
+
+    temp.name = vals[0];
+    temp.creator = vals[1];
+    temp.description = vals[2];
+    temp.date = vals[3];
+
+    localStorage.setItem(iterator, JSON.stringify(temp));
+    document.querySelector(`.todoDesc.${index}`).textContent = temp.name;
+
+    form.reset();
+    formOuter.classList.remove('open');
+    form.removeEventListener('submit', editor);
+    form.addEventListener('submit', todoCreate);
+    form.setAttribute('class', '');
+
+    edit.setAttribute('class', '');
+    edit.classList.add("dispEdit");
 }
 
 const done = document.querySelector('.done');
