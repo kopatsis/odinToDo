@@ -40,7 +40,7 @@ form{
     background: white;
     padding: min(6vw, 30px);
     border-radius: min(2vw, 30px);
-    max-width: min(100vw, 500px);
+    width: min(70vw, 350px);
 }
 .dispOuter{
     position: fixed;
@@ -71,7 +71,7 @@ button{
     cursor: pointer;
     margin: min(1.2vw, 6px);
 }
-.close, .dispClose{
+.close, .dispClose, .dispEdit{
     color: black;
     border: 0.16em solid black;
 }
@@ -105,4 +105,13 @@ input, textarea{
     cursor: pointer;
     margin: min(1.2vw, 6px);
     background: none;
+}
+.dispButtons{
+    display: flex;
+    justify-content: space-between;
+}
+.display{
+    margin-bottom: min(1.2vw, 6px);
+    padding: min(0.6vw, 3px);
+    border: 1px solid black;
 }

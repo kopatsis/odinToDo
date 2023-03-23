@@ -92,11 +92,16 @@ function displayTask(e){
     dispOuter.classList.add('open');
     let temp = JSON.parse(localStorage.getItem(parseInt(e.target.classList[1])));
     dblInner.innerHTML = `
-    <div class="disp name">Task Name: ${temp.name}</div>
-    <div class="disp creator">Task Creator: ${temp.creator}</div>
-    <div class="disp desc">Description: ${temp.description} </div>
-    <div class="disp date">Date Created: ${temp.date}</div>
-    <div class="disp stat">Status: ${temp.status}</div>
+    <div class="disp name">Task Name:</div>
+    <div class="display small">${temp.name}</div>
+    <div class="disp creator">Task Creator:</div>
+    <div class="display small">${temp.creator}</div>
+    <div class="disp desc">Description:</div>
+    <div class="display large">${temp.description}</div>
+    <div class="disp date">Date Created:</div>
+    <div class="display small">${temp.date}</div>
+    <div class="disp stat">Status:</div>
+    <div class="display small">${temp.status}</div>
     `;
 }
 
@@ -258,10 +263,12 @@ function populateBeg(key, value){
 
     if (temp.status == "Incomplete"){
         tempcomp.onclick = completeTask;
+        tempcomp.textContent = "✓ Complete";
         tdsect.appendChild(temphouse);
     } else{
         tempcomp.onclick = undoComplete;
         tempdesc.classList.add('compDesc');
+        tempcomp.textContent = "✗ Incomplete";
         done.appendChild(temphouse);
     }
 }
