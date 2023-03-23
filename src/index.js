@@ -7,24 +7,67 @@ function displayForm () {
 }
 
 const close = document.querySelector('.close');
-close.addEventListener('click', () => {
-    formOuter.classList.remove('open');
-});
+close.addEventListener('click', formClose);
+
+function formClose(){
+    if (form.classList.length > 0){
+        form.reset();
+        formOuter.classList.remove('open');
+        form.removeEventListener('submit', editor);
+        form.addEventListener('submit', todoCreate);
+        form.setAttribute('class', '');
+
+        edit.setAttribute('class', '');
+        edit.classList.add("dispEdit");
+    } else{
+        formOuter.classList.remove('open');
+    }
+}
+
+
 window.addEventListener('keyup', function esc(e){
-    if (e.key == 'Escape' && formOuter.classList.contains('open')) formOuter.classList.remove('open');
+    if (e.key == 'Escape' && formOuter.classList.contains('open')){
+        if (form.classList.length > 0){
+            form.reset();
+            formOuter.classList.remove('open');
+            form.removeEventListener('submit', editor);
+            form.addEventListener('submit', todoCreate);
+            form.setAttribute('class', '');
+
+            edit.setAttribute('class', '');
+            edit.classList.add("dispEdit");
+        } else{
+            formOuter.classList.remove('open');
+        }
+    } formOuter.classList.remove('open');
     if (e.key == 'Escape' && dispOuter.classList.contains('open')) {
         dispOuter.classList.remove('open')
         edit.setAttribute('class', '');
         edit.classList.add("dispEdit");
     }
 });
+
 window.addEventListener('click', function escape(e){
-    if (e.target.classList.contains('formOuter') && e.target.classList.contains('open')) formOuter.classList.remove('open');
+    if (e.target.classList.contains('formOuter') && e.target.classList.contains('open')){
+        if (form.classList.length > 0){
+            form.reset();
+            formOuter.classList.remove('open');
+            form.removeEventListener('submit', editor);
+            form.addEventListener('submit', todoCreate);
+            form.setAttribute('class', '');
+
+            edit.setAttribute('class', '');
+            edit.classList.add("dispEdit");
+        } else{
+            formOuter.classList.remove('open');
+        }
+    } 
     if (e.target.classList.contains('dispOuter') && e.target.classList.contains('open')) {
         dispOuter.classList.remove('open')
         edit.setAttribute('class', '');
         edit.classList.add("dispEdit");
     }  
+
 });
 
 var iterator = 0;
@@ -167,6 +210,7 @@ function editFinal(e){
 
     edit.setAttribute('class', '');
     edit.classList.add("dispEdit");
+
 }
 
 const done = document.querySelector('.done');
